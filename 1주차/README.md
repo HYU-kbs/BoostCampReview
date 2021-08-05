@@ -300,3 +300,136 @@ precourse에서 이해되지않았던 확률론 부분을 다시 들어보니 �
 또, 선택학습이 난이도가 있어 고민하고 검색하는데 시간을 많이 쓴 것같다.
 
 강의의 내용도 점점 어려워지고 있어 걱정이되지만 다른분들과 이야기하며 해결해 나갈 것이다.
+
+# 8 / 5 (목)
+
+### 1. 강의 복습
+
+* Numpy(Numerical Python)
+    - 파이썬의 고성능 과학 계산용 패키지이다.
+    - 일반 list보다 빠르고 메모리 효율적이며 반복문없이 배열을 처리할 수 있다.
+    - numpy의 array는 ndarray 타입으로 한가지 type만 들어갈 수 있다. (Dynamic typing not supported)
+    
+* ndarray
+    - array의 데이터 타입인 **dtype**과 dimension인 **shape**가 있다.
+    - 차원의 개수인 **ndim**과 element의 개수인 **size**, array의 byte크기인 **nbytes**가 있다.
+      
+* Handling shape
+    - array의 shape을 변경하는 **reshape**가 있다.
+    - **flatten**은 다차원의 array를 1차원으로 바꿔준다.
+    ```python
+    # a의 shape은 (2, 4)
+    a = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+  
+    # -1은 size를 기반으로 저절로 계산해준다. b의 shape은 (4, 2)
+    b = np.array(a).reshape(-1, 2)
+    ```
+
+* Indexing과 Slicing
+    - numpy의 **indexing**은 a[0][0]과 a[0, 0] 모두 지원한다.
+    - numpy는 **slicing**을 지원한다.
+    ```python
+    a = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+    # a[:2,:2], a[:, 3], a[:,::2]과 같은 연산이 가능하다.
+    ```
+  
+* Array creation
+    - **arange**는 array의 범위를 설정하여 array를 만들어준다.
+    - **zeros**와 **ones**는 각각 0과 1로 가득찬 array를 만들어준다.
+    - **empty**는 비어있는 array를 만들어준다. (memory initialization이 안 되어있음)
+    - **zeros_like**와 **ones_like**, **empty_like**는 기존의 array와 같은크기를 가지면서 각각 0과 1, 비어있는 값으로 가득찬 array를 만들어준다.
+    ```python
+    a = np.arange(0, 10, 0.5)
+    b = np.zeros(shape=(2, 2))
+    c = np.ones_like(b)
+    ```
+    - **identity**는 단위행렬을 만들어주고, **eye**는 대각선이 1인 행렬을 만들어준다.
+    - **diag**는 행렬의 대각성분만 추출할 때 사용된다.
+    ```python
+    a = np.identity(3)
+    b = np.eye(N=3, M=5, k=1) # k는 시작점
+    c = np.diag(b, k=1)
+    ```
+    - **random.uniform**과 **normal, binomial, exponential**은 각각의 확률분포에서 sampling을 해준다.
+    
+* Operation function
+    - **axis**는 operation을 수행할 때 기준이되는 dimension 축이다.
+    - 새롭게 추가된 dimension에 axis 0번을 부여한다. **np.newaxis**를 이용해 새로운 축을 추가할 수 있다.
+    - **sum**은 ndarray의 합을 구해준다. 이때 axis별로 계산을 다르게 할 수 있다.
+    - 그외에도 **mean**, **std** 등이 있다.
+    - **concatenate** array를 서로 붙이는 함수로 위아래로 붙이는 **vstack**과 좌우로 붙이는 **hstack**이 있다.
+    - **concatenate**의 axis는 붙이고 난 뒤 생기는 axis의 결과라고 생각하면 이해하기 편하다.
+    
+* Array operation
+    - array끼리 shape이 같을 때 element끼리 +, -, *가 가능하다. (Element-wise operation)
+    - **np.dot**을 이용해 행렬끼리 곱셈, **.T**또는 **transpose**를 이용해 transpose가 가능하다.
+    - array와 scalar, 또는 shape이 다른 array연산에서 **broadcasting**이 일어난다.
+    - jupyter에서 **%timeit**을 이용하여 성능을 비교할 수 있다.
+    
+* Comparison
+    - **all**과 **any**는 boolean array에 대해 연산을 지원한다.
+    - shape이 같은 array끼리의 비교도 broadcasting이 일어난다.
+    - **logical_and, or, not**은 boolean array에 대해 연산을 지원한다.
+    - **where**(boolean_array, True_value, False_value)로 boolean_array에 따라 값을 다르게 넣을 수 있다.
+    - **where**(boolean_array)는 True인 index array를 Tuple로 반환한다.
+    - **isnan, isfinite**로 숫자인지, 유한한지 확인할 수 있다.
+    - **argmax, argmin**으로 axis를 활용하여 최대최소인 index를 알 수 있다.
+    - **argsort**는 작은값을 index로 반환한다.
+    
+* Boolean index와 Fancy index
+    - **boolean index**는 a[a > 3]과 같이 사용한다. 이때, shape이 같아야한다.
+    - **fancy index**는 a[b]와 같이 사용한다. 이때, b는 int자료형의 index array이다.
+    - matrix array에 대해서도 a[b, c]와 같이 사용한다. 이때, b, c는 int자료형의 index array이다.
+
+* Numpy I/O
+    - **loadtxt, savetxt**로 저장과 불러오기가 가능하다.
+    - **load, save**는 pickle형태로 저장되며 .npy로 저장된다.
+    
+* Convolutional Neural Network (CNN)
+    - MLP에서는 입력벡터 x가 가중치 행렬 W와 곱해지는 형태였다.
+    - 하지만 CNN에서는 커널을 입력벡터상에서 움직이면서 곱해지는 형태이다.
+    - 수학적인 의미로 보면 신호(signal)를 커널을 이용해 증폭, 감소시켜서 정보를 추출하는 의미이다.
+    - CNN은 입력 신호에따라 다양한 차원을 갖게된다.
+    - 입력신호의 크기를 (H, W), 커널의 크기 (K_H, K_W), 출력 크기를 (O_H, O_W) 라고 할때, 이들 사이에는 다음과 같은 식을 만족한다.
+    
+            O_H = H - K_H + 1
+            O_W = W - K_W + 1
+    - CNN의 back propagation 역시 CNN의 연산과 동일하게 gradient를 곱해준다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+* Assignment3_Maximum_Likelihood_Estimation(MLE)
+
+수식을 유도하는 것은 강의의 내용과 다르지 않아 어렵지 않았다.
+
+하지만 pyplot을 써본 적이 없어 pyplot을 구현하지 못했다.
+
+그리고 처음으로 수식을 마크다운언어로 작성했다. 
+
+솔루션이 나오고나서 비교해봐야겠다고 생각했다.
+
+---
+
+### 3. 피어세션 정리
+
+서로 과제를 수행하면서 생긴 질문들을 주로 이야기했다.
+
+- mini-batch를 이용하여 데이터를 추출할 때, 중복되지 않게 뽑기위해 비복원추출을 이용한다.
+
+- RNN에서 시퀀스가 너무 길면 적당히 잘라서 back-propagation한다.
+
+- 미분식을 코딩으로 구현할 때, 직접 미분하여 사용하는 것과 근사해 사용하는 것의 차이에 대해 이야기했다.
+
+---
+
+### 4. 학습 회고
+
+피어세션이 서로 질문을 답해주는것만으로도 시간이 모자르다고 생각했다.
+
+그리고 내가 쉽게 넘어갔던것도 더 자세히 질문하고 배워가는 과정이 정말 좋다고 생각했다.
+
+마스터클래스에서 교수님이 저희의 궁금한점들을 너무 잘 답해주신것 같아 1시간이 짧다고 느꼈다.
+
+앞으로 공부해나가야 할 길을 알게 된 것 같다.
