@@ -433,3 +433,70 @@ precourse에서 이해되지않았던 확률론 부분을 다시 들어보니 �
 마스터클래스에서 교수님이 저희의 궁금한점들을 너무 잘 답해주신것 같아 1시간이 짧다고 느꼈다.
 
 앞으로 공부해나가야 할 길을 알게 된 것 같다.
+
+# 8 / 6 (금)
+
+### 1. 강의 복습
+
+* Pandas
+    - 구조화된 데이터의 처리를 지원하는 라이브러리 (**Pan**el **da**ta)
+    - **read_csv**로 파일이나 웹 파일을 불러올 수 있다.
+    - **head**로 맨 앞의 데이터를 불러올 수 있다. 
+    - **columns** 이름도 지정할 수 있다. **values**로 안의 데이터를 읽을 수 있다.
+    - column 한줄을 **series**, 전체 데이터 테이블을 **data_frame**이라고 한다.
+    - series에 index를 지정할 수 있다.
+    - data_frame에는 index와 column을 지정할 수 있다.
+    - **loc**은 index의 이름으로, **iloc**은 index의 위치로 indexing이 가능하다.
+    - numpy와 마찬가지로 series로 boolean 비교를 할 수 있고, transpose도 가능하다.
+    - to_csv로 저장이 가능하다.
+    - **del**이나 **drop**으로 column을 지울 수 있다.
+    - Series끼리의 더하고 빼는 연산이 가능하다.
+    - DataFrame끼리도 더하고 빼는 연산이 가능하다.
+    - Series와 DataFrame끼리의 연산은 broadcasting이 일어난다.
+    - Series에 map, replace를 사용하여 변경할 수 있다.
+    - DataFrame에 apply를 이용하여 series 전체에 적용할 수 있다.
+    - describe로 전체적인 정보를 알 수 있다.
+    - groupby를 이용해 split-apply-combine을 연산할 수 있다.
+    - grouped된 상태에서 aggregation, transform, filter를 이용할 수 있다.
+    
+* RNN (Recurrent Neural Network)
+    - 시퀀스 데이터는 소리, 문자열, 주가와 같이 시간 순서에 따라 나열된 데이터이다.
+    - 이전에 시컨스 데이터를 가지고 앞으로 발생할 데이터의 확률분포를 예측하기 위해 조건부확률을 이용한다.
+    - 하지만 과거의 모든 데이터를 다 계산하는 것이 아닌, 고정된 길이만큼만 사용하기도 한다.
+    - 직전의 데이터 X_t-1와 과거의 잠재변수 H_t를 예측에 이용한다.
+    - MLP와 다르게 잠재변수 H에 해당하는 가중치행렬이 존재한다.
+    - RNN의 back-propagation은 back-propagation through time(BPTT)라고 한다.
+    - 시퀀스의 길이가 길어질 수록 gradient의 계산이 불안정해진다. (vanishing)
+    - 이를 해결하기위해 길이를 끊어서 사용한다. (truncated)
+    - 이를 해결하기위해 LSTM이나 GRU라는 모델을 이용한다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+멘토님들과 캠퍼분의 설명을 들으면서 내가 풀었던 과제와 비교하며 들었다.
+
+저와 같은 의문을 가지신 캠퍼분이 계셨던 것이 신기했다.
+
+솔루션과 비교해서 부족한 부분을 채워야겠다고 생각했다.
+
+---
+
+### 3. 피어세션 정리
+다른 캠퍼분이 선택과제 1번에서 그래프 모양에 대해 이야기했다.
+- plot으로 넣는 값인 error가 흔히 말하는 error가 아닌 목적식을 넣어야 모양이 제대로 나온다.
+
+정규표현식에 대해 자세하게 배웠다.
+- 예시로 전화번호를 추출하는 형태를 들어 쉽게 이해할 수 있었다.
+
+특이값분해(SVD)에 대해 자세하게 배웠다.
+- 그림을 넣어가며 설명을 해주신 덕분에 쉽게 이해할 수 있었다.
+- https://jjonhwa.github.io/booststudy/2021/08/06/booststudy-plus-Singular_Value_Decomposition(특이값_분해)/
+
+
+---
+
+### 4. 학습 회고
+
+드디어 한 주의 학습이 끝났고, 아직까진 큰 어려움은 없는것 같다.
+
+시작이 반이라고 생각하기 때문에 다음주도 더 열심히 해야겠다고 생각했다.
