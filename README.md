@@ -5,6 +5,11 @@
 3) 피어세션 정리
 4) 학습 회고
 
+# 8 / 10 (화)
+강의 - DL_Basic 3강, Data_Viz 2-1강
+
+과제 - 필수과제 Optimization, 선택과제 AAE
+
 # 8 / 9 (월)
 강의 - DL_Basic 1, 2강, Data_Viz 1강
 
