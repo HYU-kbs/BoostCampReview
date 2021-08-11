@@ -209,4 +209,103 @@ Mnist 데이터 학습에 MLP대신 Transformer를 이용하여 구현하는 과
 
 또, 데이터 시각화라는 분야에 대해 생소했는데 어떤 분야인지 알게 되었고, 사람에 중점이 되어있는 분야라는 것을 알게 되었다.
 
-아직 학습하지 못한 Transformer, Encoder 같은 모델에 대해서는 학습한 이후에 선택과제를 다시 보아야겠다고 생각했다. 
+아직 학습하지 못한 Transformer, Encoder 같은 모델에 대해서는 학습한 이후에 선택과제를 다시 보아야겠다고 생각했다.
+
+
+# 8 / 11 (수)
+
+### 1. 강의 복습
+* Convolution
+    - filter의 종류에 따라 이미지에 blur, emboss, outline등의 효과를 얻을 수 있다.
+    - 예를 들어 32x32x3 이미지에 5x5x3 filter를 4개 사용하여 convolution하게 되면 결과는 28x28x1이 4개, 즉 28x28x4가 생긴다.
+    - Convolution Neural Network는 convolution layer, pooling layer, fully connected layer로 이루어져있다.
+    - 이 중 convolution과 pooling layer는 feature extraction을 수행하고 fully connected layer는 decision making을 한다.
+    - CNN에서 parameter의 수가 많을수록 학습이 어렵고 generalization performance가 떨어진다.
+    - 따라서 parameter의 수가 적게 설계하는 것이 중요하다.
+    - Stride - filter를 얼마나 움직일지에 대한 것이다.
+    - Padding - Boundary에서 값을 덧붙이는 것을 말한다. (Zero padding)
+    - 예를 들어 40x50x128 -> 40x50x64로 filter가 3x3일때, parameter를 구한다면,
+        - filter의 channel은 input feature map의 channel과 같다.(3x3x128)
+        - 이러한 channel은 64개 있다고 할 수 있다.
+        - 따라서 parameter의 수는 3 x 3 x 128 x 64 = 73728이다.
+    - AlexNet의 parameter수의 대부분은 마지막 fully connected layer가 지배적이다.
+        - 따라서 이 숫자를 줄이기 위해 CNN을 깊게 쌓고, 마지막을 작게 쌓는다.
+    - 1x1 Convolution으로 dimension(channel)을 줄여 parameter수를 줄일 수 있다.(e.g. bottleneck architecture)
+
+* Modern CNN - ImageNet Large-Scale Visual Recognition Challenge(ILSVRC)에서 수상을 한 5개의 Network
+    - **AlexNet**
+        - 5개의 CNN과 3개의 dense layer로 구성된다.
+        - ReLU를 사용하여 gradient vanishing을 없앴다.
+        - Data Augmentation과 Dropout을 이용했다.
+        - 지금은 당연한 기법들이 당시에는 그렇지 않았다.
+    - **VGGNet**
+        - 3x3 Convolution filter를 사용했다.
+        - 3x3을 2번 사용하는 것이 5x5 1번 사용하는 것보다 더 효율적이다. (같은 receptive field를 가지면서도 paremeter 수가 더 적다.)
+    - **GoogleNet**
+        - Inception Block을 활용해 parameter수를 줄였다. (하나의 input을 여러 path를 거쳐 마지막에 concat함)
+        - 1x1 Convolution으로 dimension 수를 줄였다.
+        - 예를 들어 128 channel feature map에 3x3 convolution filter를 적용해 128 channel output을 만든다고 하면,
+            - parameter의 수는 3 x 3 x 128 x 128 = 147456이다.
+            - 하지만 1x1 convolution을 이용해 중간에 channel을 32로 줄이게 된다면 1 x 1 x 128 x 32 + 3 x 3 x 32 x 128 = 40960이다.
+    - **ResNet**
+        - Neural Network가 깊어질수록 학습에 어려움이 있다.
+        - 하지만 input을 다시한번 더해주는 residual을 추가하여 이를 해결했다. (skip connection)
+        - 1x1 Convolution을 활용해 dimension을 줄이고 output의 channel도 조정했다. (bottleneck architecture)
+    - **DenseNet**
+        - residual을 하지않고 concat으로 이어 붙였다.
+        - 늘어난 channel을 1x1 Convolution으로 다시 줄였다를 반복하는 Network.
+            
+* Semantic Segmentation
+    - Semantic Segmentation은 각 pixel이 어떤 object에 속하는지 분류하는 문제로, 자율주행 등에 이용된다.
+    - Fully Convolution Network는 feature map을 flatten하여 fully connected layer를 통과시키는 것과 같은 연산이다. (Convolutionalization)
+    - 이와 같은 network는 input image의 크기에 상관없다는 장점이 있다. (image가 커지면 마지막에 heat map을 생성)
+    - heat map을 가지고 segmentation을 수행할 수 있다.
+    - output을 원래의 dense pixel로 upsampling 한다(Deconvolution)
+    - Deconvolution은 convolution의 완벽한 역연산은 아니지만, parameter의 수를 계산할 때 역연산이라고 생각하면 좋다.
+    
+* Object detection
+    - R-CNN은 region으로 나누어 각각을 AlexNet을 통과시키는 방법이다.
+    - SPPNet은 bounding box를 찾아 CNN을 한번만 통과시킨다.
+    - Region Proposal Network는 anchor box를 만들어 물체가 있을 만한 곳을 찾는다.
+    - YOLO(You Only Look Once) - 한번에 multiple bounding box를 이용한다.
+
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+CNN은 실습을 따라가면서 수행하였고, 크게 어렵지 않았다. MLP보다 성능이 뛰어난 것을 확인했다.
+
+Mixture Density Network 과제는 양이 많았지만 구글링하며 나름대로 한줄 한줄 실행하며 이해해보았다.
+
+먼저, 기존의 function approximation은 x가 하나 주어지면, y가 하나로 나오는 함수였다.
+
+하지만, 우리가 원하는 함수가 역함수로 되어서 만약, x가 하나 주어졌을때 y가 여러개 나오는 함수라면 어떻게 해야하는가가 문제였다.
+
+그래서 반대로 생각해 y가 하나 주어지면 이를 gaussian function들의 합으로 생각해 계산한다는 것이다.
+
+각각의 gaussian function의 parameter인 가중치 W, 평균 m, 표준편차 s를 학습시키는 것이다.
+
+loss function의 경우, 주어진 x에 대해 y가 나올 확률로 정의했기때문에 cross-entropy식을 이용했다.
+
+---
+
+### 3. 피어세션 정리
+오늘은 모더레이터로서 피어세션을 진행해나갔다.
+
+CNN 강의를 관련해 질문이 있어서 정리를 해보았다.
+
+* Dense layer의 가중치 또한 학습이 진행되는가?
+    - 에러에 따라 모든 (Conv, FCN)의 가중치들의 학습이 진행된다.
+* Convolution 연산에서 가중치의 차원은 (kernel_W, kernel_H, in_channel, out_channel)과 같다. 그렇다면 in_channel 기준으로 같은 값으로 연산이 진행되는지(Broadcasting) 또는 각 in_channel마다 다른 값을 가지는지 궁금하다.
+    - 강의에서 학습할 가중치의 개수가 “kernel_W * kernel_H * in_channel * out_channel” 이라고 설명한 것으로 미루어 보아, 각각 다른 in_channel 가중치는 각각 다른 값을 가질 것이라고 생각된다.
+    - e.g. in_channel 기준 각각 다른 가중치의 값은 다음과 같다. (parameter[0,0,:,0])
+
+그리고 내가 이해한대로 다른 캠퍼분들께 선택과제 MDN을 설명했다.
+
+---
+
+### 4. 학습 회고
+
+모더레이터로써 선택과제에 대해 내 나름대로 설명했는데, 다른분들이 많이 이해하신것 같았다.
+
+그리고 아직 배우지않은 모델에 대해서는 추가적으로 학습이 필요하다고 생각했다.
