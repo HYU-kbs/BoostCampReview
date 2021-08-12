@@ -309,3 +309,96 @@ CNN 강의를 관련해 질문이 있어서 정리를 해보았다.
 모더레이터로써 선택과제에 대해 내 나름대로 설명했는데, 다른분들이 많이 이해하신것 같았다.
 
 그리고 아직 배우지않은 모델에 대해서는 추가적으로 학습이 필요하다고 생각했다.
+
+# 8 / 12 (목)
+
+### 1. 강의 복습
+
+* Recurrent Neural Network
+    - Sequential Data를 다루기 위해 사용되는 모델이다. (입력의 차원을 알 수 없다.)
+    - Naive model은 과거의 모든정보를 고려해 앞으로 나올 말을 예측한다.
+    - Autoregressive model은 과거의 몇 개의 정보만 고려한다고 정한다.
+    - 이 중 Markov model(first order autoregressive model)은 한 step만 고려한다.
+        - joint distribution을 표현하기 쉽지만 현실적이지 않다.
+    - latent autoregressive model은 hidden(latent) state를 만들어 과거의 모든정보를 요약한다고 생각한다.
+    - RNN은 short-term dependency 문제를 가지고 있다. (가까운 정보만 고려되고 한참 멀리있는 정보가 잘 고려되지 않는 것)
+    - RNN에는 exploding/vanishing gradient 문제가 있다.
+    - 이를 보완하는 Long Short Term Memory(LSTM) 모델이 있다.
+    
+* LSTM
+    - input 단어 x_t
+    - output hidden state h_t
+    - 이전 cell로 부터 받는 previous cell state, previous hidden state h_t-1
+    - 이후 cell로 보내주는 next cell state, next hidden state h_t가 있다.
+    - 각각의 cell에는 forget gate, input gate, output gate가 있다.
+    - forget gate는 현재입력 x_t와 이전의 output h_t-1을 가지고 previous cell state를 얼마나 기억할 지를 정해준다.
+    - input gate는 현재입력 x_t와 이전의 output h_t-1을 가지고 cell state에 얼마나 반영할지를 정해준다.
+    - 그 후 update cell에서 이 두 gate의 결과를 가지고 cell state를 update해 next cell state로 나간다.
+    - output gate는 현재입력 x_t와 이전의 output h_t-1을 가지고 cell state와 조합해 next hidden state로 나간다.
+    
+* Gated Recurrent Unit
+    - LSTM보다 간단한 구조를 갖고 있다.
+    - reset gate, update gate를 갖고 있고, cell state가 없고 hidden state만 있다.
+    - 하지만 Transformer의 등장으로 LSTM, GRU를 대체하고 있다.
+    
+* Transformer
+    - Sequential Data를 다루기 위한 모델로, sequential data가 trimmed, omitted, permuted된 것을 해결하기 위해 제안되었다.
+    - 재귀적인 구조대신 **Attention**을 활용한다.
+    - 어떤 문장이 입력으로 들어오게 되면 RNN은 이를 재귀적으로 수행했다.
+    - 하지만 Transformer는 문장을 한번에 encoding하는 것이 가능하다.
+    - Transformer는 같은 단어에 대해서도 주변 단어와의 관계를 통해 output이 달라질 여지가 있으므로 다른 모델에 비해 flexible하다는 점이 있다.
+    - 하지만 n개의 단어를 동시에 처리하려면 만들어야하는 attention map이 n^2이므로 메모리를 많이 사용한다.
+    - Transformer는 encoding부분, encoder와 decoder 사이의 부분, decoding부분으로 나눌 수 있다.
+- Encoding
+    - 각각의 encoder는 stacked된 구조를 가지며, encoder는 **Self-Attention**과 **Feed Forward Neural Network**로 이루어져있다.
+    - Self-Attention은 한 단어가 나머지 단어들에 영향을 받는 부분이고(dependent), Feed Forward는 그렇지 않다(independent).
+    - positional encoding을 통해 단어의 위치가 다른 문장에 대해서도 다르게 작동한다.
+    - Self-Attention은 positional encoding된 단어에 대해 **Query, Key, Value** 벡터를 만들어낸다.
+    - Encoding하고 싶은 단어의 Query와 자신을 포함한 나머지 단어의 Key를 내적해 **Score**를 계산한다.
+    - Score를 key의 dimension을 가지고 normalize하고 softmax를 취해 value와 weighted sum을 통해 encoding할 수 있다.
+    - query와 key의 dimension은 같아야하고, value의 dimension과는 다를 수 있다.
+    - 이와 같은 연산을 행렬을 이용하면 쉽게 구할 수 있다.
+- Multi-Head Attention(MHA)
+    - Attention을 여러번 수행해 여러 encoding 결과를 만든다.
+    - 여러 encoding 결과를 concat한 후 다시 input의 dimension과 맞추기 위해(같은 encoder 구조를 사용하기 위해) linear map 행렬과 곱한다.
+
+* Encoder와 Decoder 사이
+    - input단어의 Key와 Value를 보낸다.
+    - decoder 단어의 query를 가지고 최종 출력을 만든다.
+    
+* Decoder
+    - 학습할 때 masking을 통해 미래의 정보를 볼 수 없게 한다.
+    - Output은 Autoregressive로 단어의 분포를 가지고 sampling해 나온다.
+    
+- Vision Transformer는 이미지분류에 Transformer Encoder를 활용했다.
+- DALL-E는 문장을 가지고 새로운 이미지를 만든다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+LSTM으로 MNIST data에 대해서 좋은 결과가 나온다는 것을 확인했다.
+
+MHA에서는 Query, Key, Value shape이 많이 헷갈렸다. 그리고 transformer로 뭔가 학습한 것이 아니라 모델만 만든것이라 학습이 잘되는지 확인하지 못했다.
+
+그리고 구조가 실습을 진행하면서 잘 기억나지 않아 수업자료를 다시 참고하며 진행했다.
+
+---
+
+### 3. 피어세션 정리
+
+오늘 배운 내용들이 많이 중요하면서 어려웠던 내용이라 관련해 질문이 있었다.
+
+LSTM의 각각의 gate에 대해 다시한번 짚고 넘어갔다.
+
+그리고 MHA에서 Q와 K, V의 개수가 다르더라도 된다고 했는데, 이 부분에 대해서는 나도 이해하지 못했다.
+
+선택과제 해설 전에 피어분들과 솔루션을 보고 나름대로 답을 맞춰보았다.
+
+
+---
+
+### 4. 학습 회고
+
+오늘배운 Transformer는 결국 NLP, CV 모두 중요한 모델이고, 상당히 좋은 성능을 내고 있어 복습이 꼭 필요하다고 생각했다.
+
+그리고 멘토님과의 오피스아워에서 들었던것처럼 선택과제에 대해서도 너무 조급해 하지 않아야겠다고 생각했다.
