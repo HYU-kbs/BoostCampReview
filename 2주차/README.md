@@ -402,3 +402,86 @@ LSTM의 각각의 gate에 대해 다시한번 짚고 넘어갔다.
 오늘배운 Transformer는 결국 NLP, CV 모두 중요한 모델이고, 상당히 좋은 성능을 내고 있어 복습이 꼭 필요하다고 생각했다.
 
 그리고 멘토님과의 오피스아워에서 들었던것처럼 선택과제에 대해서도 너무 조급해 하지 않아야겠다고 생각했다.
+
+# 8 / 13 (금)
+
+### 1. 강의 복습
+
+* Generative Model
+    - 단순히 이미지를 만드는 것 뿐만이 아닌 분류하는 문제까지 해결할 수 있는 모델을 explicit model이라고 한다.
+    - binary image가 n개의 픽셀로 이루어졌다면, 이 이미지는 2^n개의 state를 가지며 2^n-1의 parameter로 표현할 수 있다.
+    - 하지만 parameter가 너무 많아지므로 만약 픽셀끼리 독립적이라고 가정하면, 2^n개의 state를 가지지만, n의 parameter로 표현할 수 있다.
+    - fully dependent는 parameter가 너무 많고, independent는 너무 적어서 그 중간을 취하게 된다.
+    - Conditional Independence에서 중요한 점은 Chain Rule에서 condition을 줄일 수 있다는 것이다.
+    - Markov Assumption을 가정했을때는 parameter가 2n-1로 줄게된다.
+    
+* Auto-regressive Model
+    - MNIST 이미지 784개의 pixel을 순서를 어떻게 매기는지가 중요하다.
+    - 이중 NADE는 이전의 모든 pixel을 다 고려해 계산하는 모델이다. (Explicit model)
+    - Pixel RNN은 RNN을 이용해 rgb를 예측하고, pixel 순서에 따라 Row LSTM, Diagonal BiLSTM 등으로 나뉜다.
+    
+* Variational Auto-Encoder
+    - Variational Inference는 Posterior distribution을 찾기 위해 variational distribution으로 근사하는 과정을 말한다.
+    - 이때 사용되는 것이 KL-Divergence이다.
+    - 하지만 KL-Divergence를 줄이는 것이, ELBO(Evidence Lower BOund)를 높히는 것과 같은 의미를 가진다.
+    - ELBO는 다시 Reconstruction Term과 Prior Fitting Term으로 나뉜다.
+        - Reconstruction은 Encoder와 Decoder를 거치고 나서 원본과의 차이(loss)를 말하는 것이다.
+        - Prior Fitting Term은 latent가 prior과 비슷할지를 말하는 것이다.
+    - VAE는 implicit model로 얼마나 그럴싸 한지 알 수 없다.
+    - Prior Fitting Term은 미분가능해야하지만, prior distribution에 Gaussian 외에는 미분가능한 함수가 별로 없다.
+    
+* Adversarial Auto-Encoder
+    - VAE는 encoder의 prior fitting term이 KL을 사용하기 때문에 gaussian이 강제되는 문제가 있다.
+    - AAE는 GAN을 활용해 prior fitting term을 대체한 모델이다.
+    
+* GAN
+    - Generator와 Discriminator가 minimax game을 통해 generator를 얻는 모델이다.
+    - GAN은 결국 실제 G와 학습하고자 하는 G 사이에 Jenson-Shannon Divergence를 줄이는 것과 같다.
+    
+* Line plot
+    - 연속적으로 변화하는 값을 순서대로 나타내고 선으로 연결한 그래프
+    - 시간/순서에 따른 변화를 나타내는데 적합하고 추세를 살피기 위해 사용된다.
+    - line을 구분하는 요소에는 색상, 마커, 선의 종류가 있다.
+    - Noise로 인해 인지적인 방해가 생길 수 있으므로 smoothing을 이용해 전체적인 추세를 파악할 수 있다.
+    - 꼭 clean한 line plot이 좋은 것만은 아니다. (정확한 정보를 얻고 싶을때와 전체적인 추세를 알고 싶을때가 다르다)
+    - 간격을 일정하게 설정하고, 있는 데이터에만 마커를 표시한다.
+    - 보간(interpolation)은 추세를 알고 싶을때 사용한다.
+    - 한 데이터에 대해 단위가 다른것을 표현할 때 이중 축을 사용할 수 있다.
+    - 범례대신 line 끝에 라벨을 이용한다.
+    - min, max를 annotation 하는 것이 도움이 될 수 있다.
+    - uncertainty를 표시하기위해 연한색으로 표시 할 수 있다.
+
+* Scatter plot
+    - 점을 사용하여 두 feature간의 관계를 나타내는 그래프
+    - 색, 모양, 크기로 점을 구분한다.
+    - Scatter plot을 이용하여 상관 관계를 확인할 수 있다.
+    - 또, cluster, gap in values, outlier도 확인할 수 있다.
+    - 점이 많아 분포를 파악하기 힘들때 투명도 조절, 히스토그램, Contour plot을 이용한다.
+    - 인과관계와 상관관계는 다르다.
+    - 추세선 정보를 사용해 패턴을 보여줄 수 있다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+선택과제 솔루션을 보며 내 코드와 비교하며 틀린부분은 없는지 수정해보았다.
+
+---
+
+### 3. 피어세션 정리
+
+랜덤피어세션을 통해 다른 팀들은 논문을 찾아보기로 했다는 것을 알게되었다.
+
+그래서 우리 조도 강의중에 이야기나온 중요한 논문을 리뷰하기로했다.
+
+또, 팀 회고록 작성을 하고 각자 이야기해보았다.
+
+팀원들의 솔직한 생각들을 들을수 있어서 값진 시간이었고, 더욱 친해진 것 같다고 생각했다.
+
+---
+
+### 4. 학습 회고
+
+이번주는 정말 바쁘고 빠르게 지나간 것같다.
+
+나도 이번주엔 적극적으로 참여한것같아 뿌듯했고, 다음주도 힘내서 해야겠다.
