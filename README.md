@@ -5,6 +5,11 @@
 3) 피어세션 정리
 4) 학습 회고
 
+# 8 / 19 (목)
+강의 - PyTorch 6, 7강, Data_Viz 3-2, 3-3강
+
+과제 - 필수과제 Custom Dataset & DataLoader
+
 # 8 / 18 (수)
 강의 - PyTorch 4, 5강, Data_Viz 3-1강
 

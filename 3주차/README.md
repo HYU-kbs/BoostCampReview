@@ -8,11 +8,11 @@
     - numpy의 대부분의 사용법과 같다.
     - device를 cpu와 gpu중 선택해서 사용할 수 있다.
     - view는 copy가 일어나지 않고, reshape은 copy가 일어난다.
-    
+
 * Squeeze와 Unsqueeze
     - Squeeze는 1인 차원을 없애준다.
     - Unsqueeze는 axis를 사용해 1인 차원을 만들어준다.
-    
+
 * Tensor의 operation도 numpy와 동일하다.
 * 벡터의 내적에 dot을 사용하고, 행렬의 곱셈에는 mm과 matmmul을 사용한다.
 * mm은 broadcasting이 일어나지 않고, matmul은 일어난다.
@@ -57,7 +57,7 @@ torch의 기본 문법을 활용한 과제로 양이 생각보다 많아 다하�
 
 * torch.nn.Module에는 각각의 layer의 base class가 있다.
     - input, output, forward, backward, parameter를 정의한다.
-    
+
 * torch.nn.Parameter는 nn.Module내의 attribute로 하게된다면 required_grad=True로 해준다.
 
 * forward는 예측값을 만들어주고, backward는 loss를 미분하여 parameter를 업데이트한다.
@@ -66,10 +66,10 @@ torch의 기본 문법을 활용한 과제로 양이 생각보다 많아 다하�
     - Dataset class는 init, len, getitem등이 있다.
     - transforms는 데이터를 전처리하거나 augmentation 할 때 사용된다.
     - DataLoader는 batch를 만들거나 shuffle하는 기능이 있다.
-    
+
 * 데이터 형태에 따라 dataset class를 다르게 정의한다.
     - 이미지의 Tensor로의 변환은 학습에 필요한 시점에 변환한다.
-    
+
 * DataLoader parameter중 collate_fn은 variable 정의나 padding에 이용된다.
 
 * Data Visualization - Text
@@ -80,7 +80,7 @@ torch의 기본 문법을 활용한 과제로 양이 생각보다 많아 다하�
     - Tick label은 축에 눈금을 사용하여 정보를 제공한다.
     - Legend는 서로다른 데이터를 구분하기 위해 사용된다.
     - Annotation은 그 외의 설명을 추가할 때 사용된다.
-    
+
 
 ---
 
@@ -110,3 +110,57 @@ hook은 CNN 모델에서 중간의 output을 확인할 때 사용되기도 한�
 과제가 상당히 양도 많고 시간도 오래걸렸지만, 차근차근 하면 할 수 있는 문제들이었다.
 
 점점 pytorch에 익숙해져가는 느낌이 들었다.
+
+# 8 / 19 (목)
+
+### 1. 강의 복습
+
+* 학습 모델을 저장하려면 torch.save()를 이용한다. 모델의 형태와 파라미터를 저장한다.
+* EarlyStopping 기법을 사용하려면 중간 결과를 저장하는 checkpoint가 필요하다.
+* Transfer Learning은 이미 대용량의 데이터셋으로 만들어진 모델을 현재의 데이터셋에 적용하는 것이다.
+* Freezing을 이용해 pretrained model의 parameter를 학습시키지 않을 수 있다.
+* 학습 중간에 monitoring하는 도구중에는 Tensorboard와 Weight&Biases가 있다.
+
+
+* Data_Visualization - Color
+    - 위치와 색은 가장 효과적으로 구분되는 속성이다.
+    - 하지만 화려함은 시각화의 일부분으로 전하는 메세지가 드러나야한다.
+    - 독립된 색상으로 구성된 컬러맵은 범주형 변수에 사용하기 적합하다.
+    - 연속된 색상으로 구성된 컬러맵은 연속형 변수에 사용하기 적합하다.
+    - 발산형 색상으로 구성된 컬러맵은 상반된 값을 표현하기에 적합하다.
+    - 강조를 위해 명도, 색상, 채도, 보색대비를 이용한다.
+    - 색각 이상을 고려한 컬러맵을 사용한다.
+
+* Data_Visualization - Facet
+    - 화면을 분할해 여러 관점으로 데이터셋을 보여준다.
+    - matplotlib에서는 figure는 1개, Ax는 여러 개 사용한다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+Dataset을 스스로 만들고, DataLoader를 스스로 만드는 방법을 과제를 수행하면서 감을 익힌 것 같다.
+
+하지만 사용한 Dataset중 AG News는 이해하기가 어려웠다.
+
+
+---
+
+### 3. 피어세션 정리
+
+과제에 대한 질문들을 주로 이야기했다.
+
+과제의 양이 많아서 많은 질문들이 있었고, 혼자서 해결하지 못한 문제들을 다같이 모여 이야기해서 해결할 수 있었다.
+
+zero padding을 하기 위해 tensor에 concat이나 hstack, functional.pad를 이용할 수 있었다.
+
+또, 데이터셋에서 구현하는 getitem 함수는 train, test 여부에따라 label이 주어져있지 않을 수 있기 때문에 X만 return하도록 구현하였다.
+
+
+---
+
+### 4. 학습 회고
+
+필수과제가 상당히 까다로워 선택과제를 전혀 하지 못했다.
+
+하지만 과제 하나하나를 성실히 하면서 PyTorch를 배워가는 것 같아 다음엔 더 능숙하게 사용했으면 좋겠다.
