@@ -164,3 +164,66 @@ zero padding을 하기 위해 tensor에 concat이나 hstack, functional.pad를 �
 필수과제가 상당히 까다로워 선택과제를 전혀 하지 못했다.
 
 하지만 과제 하나하나를 성실히 하면서 PyTorch를 배워가는 것 같아 다음엔 더 능숙하게 사용했으면 좋겠다.
+
+# 8 / 20 (금)
+
+### 1. 강의 복습
+
+* Multi-GPU
+    - Node는 하나의 시스템을 말한다.
+    - Model이나 Dataset을 parallel하게 나누어 학습을 분산시킬 수 있다.
+    - Model parallel에서는 pipeline이 되도록 하는 것이 중요하다.
+    - Dataset parallel은 mini-batch와 비슷하지만, 한번에 여러 GPU에서 수행한다.
+    - 한 GPU에만 연산 불균형이 일어날 수 있다. 이때 DistributedDataParallel을 이용한다.
+    
+* HyperParameter Tuning
+    - learning rate, 모델의 크기, optimizer는 학습하지 않는 값으로 사람이 지정해 주어야한다.
+    - grid search는 일정한 간격으로 찾는 반면, random search는 그렇지 않다.
+    - 최근에는 베이지안 기반의 기법들이 많이 이용된다.
+    - Ray는 hyperparamter tuning을 위한 많은 모듈을 제공한다.
+    
+* PyTorch TroubleShooting
+    - GPUUtil을 이용해 GPU의 상태를 확인할 수 있다.
+    - torch.cuda.empty_cache()를 사용해 cache를 정리할 수 있다.
+    - loop에 tensor로 축적되는 변수를 확인한다.
+    - del 명령어를 이용해 필요없어진 변수는 삭제해준다.
+    - batch 사이즈를 줄여 실행해본다.
+    - Inference 시점에는 torch.no_grad()를 사용한다.
+    
+* Data Visualization - 그외의 팁들
+    - Grid는 무채색으로, 맨 밑에 오도록 조정된다.
+    - 또, major, minor, x축, y축 등을 선택할 수 있다.
+    - X + Y = C의 형태는 Feature의 절대적 합이 중요한 경우 사용된다.
+    - Y = CX의 형태는 Feature의 비율이 중요한 경우 사용된다.
+    - 동심원의 형태는 특정 지점에서 거리를 살펴볼 경우 사용된다.
+    - 선, 면을 추가하여 가독성을 높일 수 있다.
+    - 테마를 변경하여 한번에 변경할 수 있다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+드디어 선택과제를 읽어보면서 과제를 진행했다.
+
+Pre-trained된 모델인 ResNet을 이용해 Mnist와 FashionMnist를 학습시켰다.
+
+맨 앞쪽 layer와 맨 뒷쪽 layer의 input_feature과 output_feature를 수정해도 꽤 결과가 잘나오는 것을 확인했다.
+
+다만, 시간이 부족해 다른 모델을 사용했을 때 성능이 좋아지는지에 대해 더 알아보지 못해서 아쉬웠다.
+
+---
+
+### 3. 피어세션 정리
+
+랜덤 피어세션 이후 피어세션에서는 팀 회고록을 작성해 각자 발표하는 시간을 가졌다.
+
+또, 다음주에는 ViT논문을 가지고 리뷰를 진행할 예정이다.
+
+
+---
+
+### 4. 학습 회고
+
+이번주는 PyTorch위주로 학습을 해서 나의 부족한 점을 잘 알게된 한 주였다.
+
+다음주에 있을 대회에 앞서 복습과 PyTorch코드도 연습해야겠다고 생각했다. 

@@ -5,6 +5,11 @@
 3) 피어세션 정리
 4) 학습 회고
 
+# 8 / 20 (금)
+강의 - PyTorch 8, 9, 10강, Data_Viz 3-4강
+
+과제 - 선택과제 Transfer Learning & Parameter Tuning
+
 # 8 / 19 (목)
 강의 - PyTorch 6, 7강, Data_Viz 3-2, 3-3강
 
