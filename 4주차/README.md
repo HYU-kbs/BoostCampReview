@@ -41,3 +41,58 @@ age를 categorical로 생각할 지, regression으로 생각할 지 이야기했
 layer 변경을 하지않고 학습을 시켜보았는데, 성능이 낮았다.
 
 model을 구성하는 layer를 바꾸어가며 모델을 학습시켜야겠다.
+
+# 8 / 24 (화)
+
+### 1. 강의 복습
+
+* Data Pre-processing은 좋은 데이터를 만들기 위한 중요한 작업이다.
+* 사진에서 필요없는 부분을 잘라내는 bounding box를 활용하자.
+* 큰 사진보다 작은 사진으로도 충분히 좋은 성능이 나올 수 있다. (Resize 활용)
+* 도메인, 데이터 형식에 따라 각기 다른 전처리 과정이 필요하다.
+* Underfitting과 Overfitting의 중간에서 모델학습을 멈추자.
+* Train, Validation, Test set으로 나누어 검증에 사용하자.
+* 주어진 데이터가 가질 수 있는 여러가지 상황을 만드는 augmentation을 활용하자.
+* 다만 이러한 기법들은 항상 좋은 결과를 내진 않을 수 있다.
+* Data feeding에서 model의 처리량을 감당할 data generator를 고려해야한다.(병목현상)
+* PyTorch의 custom dataset은 init, len, getitem을 구현해줘야한다.
+* DataLoader는 dataset을 효율적으로 사용하기 위한 기능이 담긴 class이다.
+
+* Seaborn
+    - counterplot으로 개수를 세주는 bar plot을 만든다.
+    - 데이터의 분포를 살피는 plot으로 box, violin, boxen, swarm, strip등이 있다.
+    - histplot, kdeplot, ecdfplot, rugplot으로 분포를 살필 수 있다.
+    - scatterplot, lineplot, regplot으로 관계를 살펴볼 수 있다.
+    - heatmap으로 상관관계를 살펴볼 수 있다.
+
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+* 수업에서 들은 내용을 바탕으로 여러가지를 적용해 봐야겠다고 생각했다.
+    - bounding box를 활용하여 전처리를 해야겠다.
+    - 또, 그에따른 RGB 채널의 변화를 살펴봐야겠다.
+    
+* K-fold validation을 이용해 validation set을 만들어야겠다.
+
+* Data Transform을 진행할 때, 순서에따라 성능이 차이나기도 한다.
+
+* 서로다른 task의 모델을 3개 만들어 진행하는 것은 어떨까 생각했다.
+---
+
+### 3. 피어세션 정리
+
+다른 피어분들은 여러가지 pretrained된 모델을 이용해 학습을 진행하고 있었다.
+
+dataloader를 사용할 때, ImageFolder를 이용할 수 있다.
+
+이미지 normalization을 통해 학습을 더 빨리 진행할 수 있다.
+
+---
+
+### 4. 학습 회고
+
+학습을 하는데 있어 데이터의 전처리가 매우 중요하다고 생각했다.
+
+EDA 예제파일을 보면서 여러가지 방법을 떠올렸고, 잘못 labeling된 파일에 대해서 처리할 방법을 생각했다.
