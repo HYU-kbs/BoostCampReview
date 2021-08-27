@@ -194,3 +194,47 @@ class의 불균형으로 Oversampling을 시도하자.
 데이터가 충분하지 않고, overfitting이 자주 일어나기 때문에 Augmentation을 적극적으로 활용해봐야겠다고 생각했다.
 
 대부분의 face bounding box가 중앙에 있기 때문에, 중앙에 확률적으로 높게 random crop을 이용해봐야겠다.
+
+# 8 / 27 (금)
+
+### 1. 강의 복습
+
+Ensemble은 여러 모델을 사용해 결과를 내는 방식으로 bagging과 boosting이 있다.
+- hard voting, soft voting이 있다.
+
+Stratifed K fold cross validation으로 모든 class의 분포를 고려하여 validation set을 학습에 참여시키게 된다.
+
+Test Time Augmentation은 Inference중에 Augmentation을 수행하고, 출력된 여러가지 결과를 Ensemble한다.
+
+Ensemble은 성능과 효율의 trade-off 문제이다.
+
+Hyperparameter Optimization은 자동으로 최적의 hyperparameter를 찾아주지만, 시간소요가 크다.
+
+Tensorboard나 wandb를 이용해 training visualization을 할 수 있다.
+
+* Visualization
+    - joint plot은 결합확률 분포와 각각의 분포를 확인할 수 있다.
+    - pair plot은 데이터셋의 pair-wise 관계를 시각화 해준다.
+    - facet grid는 feature의 category의 관계도 살펴 볼 수 있다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+baseline코드에서 살을 붙여가며 과제를 수행할 것이다.
+
+data augmentation 중 bbox를 활용하여 randomcrop도 bbox 중심으로 하려고했다.
+
+---
+
+### 3. 피어세션 정리
+
+각자 작성한 코드를 보면서 실험결과를 발표했다.
+
+팀회고를 작성한 뒤, 각자 발표하는 시간을 가졌다.
+
+---
+
+### 4. 학습 회고
+
+주말에 augmentation과 ensemble을 적용해야겠다.
