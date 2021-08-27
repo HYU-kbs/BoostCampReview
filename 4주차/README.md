@@ -143,3 +143,54 @@ EDA 예제파일을 보면서 여러가지 방법을 떠올렸고, 잘못 labeli
 나는 전처리에 힘써서 EDA와 함께 진행했는데, 뚜렷한 성과가 없는것 같았다.
 
 팀을 맺기 전에 모델을 만들고, 정확도를 확인해보고 싶다.
+
+# 8 / 27 (목)
+
+### 1. 강의 복습
+
+모델을 training에 영향을 주는 요소에는 Loss, Optimizer, Metric이 있다.
+
+- Loss함수는 Cost함수, Error함수로도 불린다.
+- Loss도 Module을 상속한 class이다.
+- loss.backward를 통해 gradient가 업데이트된다.
+- class imbalance문제에 도움이 되는 Focal loss, label smoothing loss가 있다.
+    - focal loss는 많은 label에 대해서는 loss를 작게, 적은 label에 대해서는 loss를 크게 주는 방법이다.
+    - label smoothing loss는 one-hot 표현보다는 soft하게 표현하는 방법이다.
+    
+- Optimizer는 어느 방향으로 얼마나 움직일 지에 관한 것으로, 빠르게 수렴하게 해주는 것을 고르자.
+- Metric은 모델을 평가하기 위한 지표이다. 상황에 맞게 다른 metric을 사용한다.
+- optimizer.zero_grad는 이전 epoch에서 구한 grad를 0으로 초기화해준다.
+- Gradient Accumulation을 사용하여 여러 배치의 값으로 역전파를 할 수있다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+이전 Visualization한 것의 label끼리의 분포도 알고 싶어 코드를 수정했다.
+
+crop한 이미지들의 size가 맞지않아 resize를 어떻게 해야할지 고민했다.
+
+k-fold를 수행해 validation set을 만들어 보려했으나, mini-batch와 어떻게 써야할지 고민했다.
+
+---
+
+### 3. 피어세션 정리
+
+많은 캠퍼분들이 여러 모델에 대해서 실험적으로 성능을 비교해보았다.
+  - VGG, DenseNet, ResNet50, ResNext50
+
+class의 불균형으로 Oversampling을 시도하자.
+
+또, K fold validation 방법에 대해서도 이야기했다.
+
+다른 캠퍼분들의 코드를 보며 진행했다.
+
+---
+
+### 4. 학습 회고
+
+멘토링 시간에서 멘토님의 조언을 듣고 시도해보고 싶은 것이 생겼다.
+
+데이터가 충분하지 않고, overfitting이 자주 일어나기 때문에 Augmentation을 적극적으로 활용해봐야겠다고 생각했다.
+
+대부분의 face bounding box가 중앙에 있기 때문에, 중앙에 확률적으로 높게 random crop을 이용해봐야겠다.
