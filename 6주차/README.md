@@ -38,7 +38,7 @@ Pretrained된 VGG model의 feature extraction 부분을 freeze하여 사용한 �
 
 피어세션에서 새 캠퍼들과 그라운드룰을 정했다.
 
-그리고 앞으오 notion을 활용하여 회의록 작성과 질문을 미리 올려놓기로 했다.
+그리고 앞으로 notion을 활용하여 회의록 작성과 질문을 미리 올려놓기로 했다.
 
 ---
 
@@ -107,3 +107,68 @@ ResNet의 skip connection과 KL div와 CrossEntropy에 대해 이야기했다.
 첫주는 굉장히 여유가 있는 한 주인것 같다.
 
 남는 시간에 논문을 읽어야겠다고 생각했다.
+
+
+
+# 9 / 8 (수)
+
+### 1. 강의 복습
+
+- Computer Vision
+  - AlexNet에서 VGGNet으로 넘어가면서 깊은 모델이 receptive field가 넓어져 좋은 성능을 낸다는 것을 알았다.
+  - 하지만 너무 깊게 쌓으면 계산이 복잡할 뿐만 아니라 gradient vanishing/exploding이 일어나 성능이 떨어진다.
+  - GoogleNet은 Inception Module의 구조를 가지며 한 layer에서 다양한 크기의 kernel을 사용했다.
+  - 또, 1x1 conv를 이용해 dimension을 낮추어 사용했다.
+  - Auxiliary classifier를 두어 back propagation이 잘 이루어지도록 했다. 이는 test time에 사용되지 않는다.
+  - ResNet은 shortcut connection을 이용해 vanishing 문제를 해결했다.(back propagation 경로의 수가 늘어났다.)
+  - 이후 DenseNet은 각각의 layer output을 다음 layer뿐만 아니라 그 이후에도 연결시켜 주었다.
+  - SENet은 채널에서의 weight를 곱해줘 attention score를 계산해서 중요도를 계산한다.
+  - EfficientNet은 width, depth, resolution에서 적절한 방법으로 향상을 시켜 성능을 높혔다.
+  - Deformable Convolution으로 고정된 구조가 아닌 여러 영역에서 feature를 추출할 수 있다.
+
+
+
+- Data Visualization
+  - Interactive 시각화는 사용자가 원하는 인사이트가 각자 다를 수 있기 때문에 사용한다.
+  - 정적 시각화는 원하는 메세지를 압축해서 담는 발표자료에 적합하다.
+  - Matplotlib도 인터랙티브를 지원하지만, 주피터나 local에서만 사용 가능하다.
+  - Plotly와 Plotly Express는 문서화와 예시가 잘 되어 있다.
+  - Bokeh는 matplotlib과 유사하지만 문서화가 부족하다.
+  - Altair는 문법이 pythonic하지 않다는 단점이 있다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+이번 과제는 다양한 augmentation을 활용하면서 성능을 비교하는 과제이다.
+
+먼저, seed를 고정하는 코드를 붙여넣고 기본적인 augmentation을 적용한 것을 학습시켰다.
+
+그리고 albumentation으로 blur를 적용한 것과 비교했다.
+
+또 resize를 하고 blur한 것과 blur를 적용하고 resize를 한것도 비교했다.
+
+---
+
+### 3. 피어세션 정리
+
+https://www.notion.so/HOME-771be0eeb7c846cb935860cfa7b143ea
+
+He initialization과 Xavier initialization은 어떤 activation function을 사용하는지에 따라 결정된다.
+
+또, 과제에 대한 생각을 모두 공유해보았다.
+
+- Blur를 사용했을 때, 흰 배경이 많이 줄어들어 성능이 좋아진다.
+- CNN은 공통적인 특성을 찾는데 장점이 있는 방법인데, 일반적인 선보다 blur된 선들이 특징을 찾는데 더 유용하다.
+- 크게 Resize된 이미지에는 사람의 손떨림 같은 noise가 더 부각되어 학습에 방해가 될 수 있다.
+- Blur를 적용한 뒤 Resize를 적용하면 성능이 더 좋다는 것을 실험적으로 확인하였다.
+- Resize를 적용한다는 것을 AveragePooling으로 이해한다면, blur를 먼저 적용했을때 검은 선들이 먼저 배경으로 퍼지고 resize를 하면 정보가 덜 소실된다.
+- CNN을 freeze하고 학습시키는 것이 ImageNet과 완전히 다른 image를 학습시키기 때문에 성능이 더 떨어진다.
+
+---
+
+### 4. 학습 회고
+
+과제의 난이도는 어렵지 않았지만 이것저것 생각할 것이 참 많았다.
+
+금요일의 솔루션 세션때 확실한 답을 얻었으면 좋겠다.
