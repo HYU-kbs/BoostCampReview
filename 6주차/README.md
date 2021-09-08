@@ -48,3 +48,62 @@ LEVEL2의 첫날은 전에 배운 내용들이 많아서 크게 어렵지 않았
 
 내일은 시각화 강의도 함께 들어야겠다고 생각했다.
 
+
+# 9 / 7 (화)
+
+### 1. 강의 복습
+
+- Computer Vision
+  - 딥러닝 분야에서 데이터의 부족은 항상 문제가 되어왔다.
+  - Data Augmentation은 train dataset이 bias된 문제를 완화해준다.
+  - 종류로는 Brightness, Rotate, Flip, Crop, Affine Transform, CutMix, RandAugment 등이 있다.
+  - Transfer Learning으로 미리 배운 지식들을 다른 데이터셋에도 적용할 수 있다.
+  - Knowledge Distillation은 이미 학습한 teacher model을 student model에 지식을 전해주는 학습 방법이다.
+  - pseudo-labeling에 활용되기도 한다.
+  - Softmax의 temperature를 사용해 더 유용한 정보를 얻기도 한다.
+  - Distillation loss는 teacher와 student의 inference의 KLdiv이다.
+  - Student loss는 student의 inference와 true label의 cross entropy이다.
+  - Semi-supervised learning은 unlabeled data를 pseudo-labeling한 후에 학습에 참여시킨다.
+
+- Polar coordinate
+  - Polar plot은 x, y가 아닌 r과 theta를 이용하여 표현한다.
+  - 회전이나 주기성을 나타내기에 적합하다.
+  - Radar Chart는 별모양으로 생겨 star plot이라고도 한다.
+  - 데이터의 quality를 표현하기 적합하다.
+  - 각 feature는 독립적이면서 척도가 같아야한다.
+  - 다각형의 면적보다는 feature의 순서에따라 바뀌기도 한다.
+  - feature가 많아질수록 가독성이 떨어진다.
+- Pie Chart
+  - 원을 부채꼴로 분할하여 표현하는 통계차트이다.
+  - 많이 사용하지만 비교가 어렵고 유용성이 떨어져 bar plot과 함께 사용하자.
+- MissingNo는 결측치를 체크할 수 있는 시각화 라이브러리이다.
+- TreeMap은 계층적 데이터를 직사각형을 사용하여 포함관계를 표현한다.
+- WaffleChart는 와플형태로 discrete하게 값을 나타내는 차트이다.
+- Venn은 집합에서 사용하는 벤 다이어그램이다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+없음
+
+---
+
+### 3. 피어세션 정리
+
+https://www.notion.so/HOME-771be0eeb7c846cb935860cfa7b143ea
+
+필수과제 transform의 normalize 부분에 대해 이야기했다.
+
+Augmentation한 후에 생기는 이미지의 검은 부분(빈 부분)에 대해 이야기했다.
+
+ResNet의 skip connection과 KL div와 CrossEntropy에 대해 이야기했다.
+
+
+---
+
+### 4. 학습 회고
+
+첫주는 굉장히 여유가 있는 한 주인것 같다.
+
+남는 시간에 논문을 읽어야겠다고 생각했다.
