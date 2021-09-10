@@ -5,6 +5,11 @@
 3) 피어세션 정리
 4) 학습 회고
 
+# 9 / 9 (목)
+강의 - CV 4강, Data_Viz 7-1, 7-2강
+
+과제 - 필수과제 Classification to Segmentation
+
 # 9 / 8 (수)
 강의 - CV 3강, Data_Viz 6-1, 6-2강
 

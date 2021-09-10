@@ -172,3 +172,55 @@ He initialization과 Xavier initialization은 어떤 activation function을 사�
 과제의 난이도는 어렵지 않았지만 이것저것 생각할 것이 참 많았다.
 
 금요일의 솔루션 세션때 확실한 답을 얻었으면 좋겠다.
+
+
+# 9 / 9 (목)
+
+### 1. 강의 복습
+
+- Computer Vision
+  - Semantic Segmentation은 한 픽셀이 어떤 카테고리에 속해있는지 masking하는 task이다.
+  - 의학 이미지나 자율주행 등에 활용된다.
+  - Fully Convolutional Networks(FCN)는 segmentation의 첫 end-to-end 모델이다.
+  - 마지막 layer가 fc가 아닌 1x1 cnn이므로 입력사이즈에 상관없이 출력이 가능하다.
+  - 하지만 FCN의 결과인 feature map은 해상도가 줄여진 output을 얻게 되는데, 이때 upsampling을 이용한다.
+  - Upsampling의 종류에는 Transposed convolution과 Upsample and convolution이 있다.
+  - Transposed convolution은 적절한 kernel size와 stride를 이용해 upsampling하지만, overlap문제가 발생한다.
+  - Upsample and convolution은 영상처리에 이용되는 Nearest Neighbor이나 Bilinear같은 interpolation과 학습가능한 convolution을 같이 이용한다.
+  - FCN에서 처음 layer와 후반 layer 모두 중요한 정보를 담고있기 때문에 최종출력에 중간의 결과들을 활용한다.
+  - UNet역시 FCN과 비슷한 아이디어를 사용, contracting path를 지나 작은 activation map을 구한다.
+  - 또, expanding path를 지나 skip connection을 이용해 upsampling한다.
+  - UNet에서 각 feature map은 항상 짝수이도록 신경써야한다.
+  - DeepLab은 Conditional Random Fields(CRFs)와 Dilated Convolution(Atrous Convolution)이라는 개념을 소개했다.
+  - CRFs는 각 물체의 boundary가 확산하면서 정교한 결과를 얻을 수 있다.
+  - Dilated convolution은 커널이 upsampliing으로 확산할 때 약간의 간격을 두어 receptive field가 더 넓어지도록 한다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+이번 과제는 VGGNet의 마지막 FC layer를 1x1 convolution으로 바꾸어 일종의 heat map을 관찰하는 과제였다.
+
+과제는 어렵지 않았지만, 이를 heatmap처럼 바꿀수 있다는 사실이 신기했다.
+
+---
+
+### 3. 피어세션 정리
+
+https://www.notion.so/HOME-771be0eeb7c846cb935860cfa7b143ea
+
+Cross-entropy에서
+- 정보의 양이 많으면 정보의 희귀성이 떨어지고, 정보의 양이 적으면 정보의 희귀성이 높아진다.
+- 희귀할 수록 유의미한 정보이다.
+
+FCN같은 경우에는 input의 크기가 고정될 필요가 없는 것인가?
+
+- 그럴 필요가 없다. FCN에서 학습하는 대상이 커널뿐이기 때문에 커널은 어떤 이미지든 슬라이스를 할 수 있기 때문이다.
+
+---
+
+### 4. 학습 회고
+
+CV에서 classification에서 segmentation 분야로 확장하는 흐름을 익힐 수 있었고, 또 신기했다.
+
+내용도 점차 어려워지지만 잘 정리하고 복습해서 내용을 익혀야겠다.
