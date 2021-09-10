@@ -224,3 +224,57 @@ FCN같은 경우에는 input의 크기가 고정될 필요가 없는 것인가?
 CV에서 classification에서 segmentation 분야로 확장하는 흐름을 익힐 수 있었고, 또 신기했다.
 
 내용도 점차 어려워지지만 잘 정리하고 복습해서 내용을 익혀야겠다.
+
+
+# 9 / 10 (금)
+
+### 1. 강의 복습
+
+- Computer Vision
+  - Semantic segmentation은 instance를 구분하지 못한다.
+  - Instance segmentation이나 Panoptic segmentation은 이를 구분하는데 이때 필요한 기술이 **Object Detection**이다.
+  - 자율주행이나 Optical Character Recognition (OCR) 기술에 활용된다.
+  - 과거의 detection은 선의 각도 분포를 이용해 구현했다.
+  - 또, bounding box를 제안해주는 selective search 방법도 이용되었다.
+- **Two-stage detector**
+  - **R-CNN**은 먼저 selective search로 region proposal은 2k 이하로 받아낸 후에 각각을 classification하는 구조이다.
+  - **Fast R-CNN**은 이미지의 feature를 한번 추출하고 나서 여러 object detection에 활용하는 방법이다.
+  - Region of Interest(RoI)를 resize하여 classification과 bbox regression을 수행한다.
+  - 그러나 RoI를 추출하는 방법이 별도의 알고리즘을 사용하고 있어 속도가 느렸다.
+  - **Faster R-CNN**은 region proposal이 neural network 기반으로 이루어진다.
+  - Intersection over Union(IoU)이란 두 region의 overlap에 대한 metric이다.
+  - 비율과 크기가 서로다른 anchor box와 ground truth간의 IoU가 어느정도 높게되면 찾았다고 생각한다.
+  - Region Proposal Network(RPN)에서 Sliding하면서 매 위치마다 k개의 anchor box를 고려한다. 이때 각 anchor box마다 object인지 아닌지와 위치좌표와 너비, 높이를 regression한다.
+  - 여러개의 region proposal중에서 Non-Maximum Suppression(NMS)을 이용해 겹치는 것을 제거한다. 
+- **Single-stage detector**
+  - Two stage detector와 다르게 RoI가 없어 정확도를 줄이고 속도를 향상시켰다.
+  - You Only Look Once(YOLO)는 이미지를 grid로 나누고 anchor box와 confidence, 그리고 class를 구분한다.
+  - anchor box의 좌표와 너비, 높이, 확률, 그리고 class별 확률을 갖는다.
+  - Single Shot Multibox Detector는 bounding box에 대한 정확도를 높이기 위해 feature map의 크기에 따른 bounding box를 조절했다.
+  - Focal loss는 class imbalance 문제를 다루기 좋다.
+  - RetinaNet은 UNet과 비슷한 Feature Pyramid Network 구조를 사용해 성능을 높였다.
+  - DETR은 transformer를 detection에 적용한 모델이다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+없음
+
+---
+
+### 3. 피어세션 정리
+
+https://www.notion.so/HOME-771be0eeb7c846cb935860cfa7b143ea
+
+팀 회고를 진행했는데, 의견 공유가 활발해서 좋았지만, 개인적으로 추가적인 학습을 하지 않았던 것이 잘 못했던 것 같다.
+
+
+
+---
+
+### 4. 학습 회고
+
+이번주 강의 내용은 전보다 훨씬 어려워진것을 느꼈다.
+
+주말동안 비교적 쉬운 논문 읽기나 복습을 해야겠다.
