@@ -112,3 +112,51 @@ https://www.notion.so/HOME-771be0eeb7c846cb935860cfa7b143ea
 
 오늘의 강의는 상당히 난이도가 있었다. 어려운 내용인만큼 추가로 검색해서 공부해야겠다고 생각했다.
 
+
+
+# 9 / 15 (수)
+
+### 1. 강의 복습
+
+- Conditional generative model은 조건에 맞게 이미지를 생성해준다.
+- 일반적인 generative model과 다르게 조건에 맞게 랜덤 샘플을 만든다.
+- 예시로 audio super resolution, machine translation, article generation with the title등이 있다.
+- 또, image의 style transfer, super resolution, colorization등이 있다.
+- Super resolution은 이전에 real과 fake를 구분할 때 Mean absolute error와 mean squared error를 사용했다. 이 방법은 실제 patch들의 평균으로 학습하게 되어 상당히 blurry한 image가 만들어진다. GAN loss는 blurry한 image가 discriminator에 의해 걸러지므로 더 좋은 성능을 내게된다.
+- Image translation은 style이나 color등 image의 domain을 바꾸는 일이다.
+- Pix2Pix는 GAN loss와 L1 loss를 함께 사용했다.
+- CycleGAN은 unpaired data에 대해서도 동작한다. loss는 양방향으로의 GAN loss와 cycle-consistency loss를 이용한다.
+- Perceptual loss는 pretrained model을 활용한 loss로, image transform network의 학습에 이용된다.
+- Content target의 feature map과의 L2 loss와 Style target의 gram metric을 이용한 L2 loss를 활용한다.
+
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+Conditional GAN을 quickdraw dataset을 이용하여 구현하는 문제이다.
+
+generator가 noise와 class를 concatenate하여 생성한 이미지를 discriminator가 구분하면서 adversary하게 학습하는 구조이다.
+
+다만 discriminator 부분에서 이미지 차원이 맞지않아 에러가 발생했다.
+
+---
+
+### 3. 피어세션 정리
+
+https://www.notion.so/HOME-771be0eeb7c846cb935860cfa7b143ea
+
+pix2pix 에서 L1 loss를 같이 사용하는 이유는 결국 generator가 똑같은 이미지만 생성하는 것을 막기 위함이다. 학습을 너무 쉽게 한다.
+
+학습은 generator와 discriminator가 번갈아 가며 학습한다.
+
+noise z는 task에 따라 있을 수도, 없을 수도 있다.
+
+---
+
+### 4. 학습 회고
+
+GAN의 결과물들을 보면서 CV 과목에 더 흥미가 생겼다.
+
+눈으로 중간 과정이나 결과물을 볼 수 있다는 것이 CV의 가장 큰 장점인것 같다.
+
