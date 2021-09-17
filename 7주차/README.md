@@ -216,3 +216,40 @@ cGAN의 학습과정을 코드를 보면서 이해했다.
 어려운 강의 내용이었지만, multi-modal이 어떤식으로 작동하는지에 대해 배웠다.
 
 다 이해하지 못할만큼 어려웠기 때문에 나중에 꼭 복습해야겠다고 생각했다.
+
+
+
+# 9 / 17 (금)
+
+### 1. 강의 복습
+
+- 3D는 우리가 사는 세상이며 AR/VR이나 3D printing, medical 분야에서 다루어진다.
+- 이미지는 3D 세상을 2D에 projection한 것이다.
+- 서로 다른 각도에서 찍은 2개의 사진이 있으면 3D point를 추출할 수 있다.
+- 컴퓨터에서 3D는 multi-view image., volumetric, part assembly, point cloud, mesh, implicit shape한 방법으로 나타낼 수 있다.
+- ShapeNet은 3D object들의 dataset이다. 또 PartNet도 part가 구분된 3D dataset이다.
+- SceneNet은 Depth를 가진 실내 이미지 dataset이다. 또, ScanNet은 scan해서 찍은 실내 이미지이다.
+- KITTI나 Waymo dataset은 자율주행을 위한 실외 이미지이다.
+- 3D task로는 recognition, detection, semantic segmentation, generation등이 있다.
+
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+3D focusing에 있어서 depth map이 중요하다는 것을 느꼈다.
+
+---
+
+### 3. 피어세션 정리
+
+https://www.notion.so/HOME-771be0eeb7c846cb935860cfa7b143ea
+
+새로운 팀 결성에 앞서 각종 TMI 방출과 팀회고를 했다.
+
+
+---
+
+### 4. 학습 회고
+
+추석연휴동안 잘 쉬어서 다음 P stage를 대비하기로 했다.
