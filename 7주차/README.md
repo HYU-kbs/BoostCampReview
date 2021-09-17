@@ -160,3 +160,59 @@ GAN의 결과물들을 보면서 CV 과목에 더 흥미가 생겼다.
 
 눈으로 중간 과정이나 결과물을 볼 수 있다는 것이 CV의 가장 큰 장점인것 같다.
 
+
+
+# 9 / 16 (목)
+
+### 1. 강의 복습
+
+- Multi-modal learning은 다른 종류의 데이터로 학습하는 것을 말한다.
+- 서로 다른 데이터끼리의 표현 방법의 차이가 있기 때문에 multi-modal learning에 어려움이 있다.
+- 또, 데이터끼리의 matching이 unbalance한 문제도 있다.
+- 쉬운 modality로만 학습하려는 경향이 있다.
+- 많이 사용되는 architecture로 Matching, Translating, Referencing이 있다.
+- Visual data & text의 matching task로 image tagging, image&food recipe가 있다.
+- image tagging은 image에서 text로, text에서 image로 찾아주는 task이다.
+- 각각의 matching된 데이터를 같은 embedding space로 바꾸고 거리를 줄이는 방향으로 학습된다. 서로 다른 데이터는 거리를 늘이는 방향으로 학습된다.
+- image&food recipe는 image를 보고 recipe와 재료로, 반대로 recipe와 재료에서 image로 찾아주는 task이다.
+- Translation task로는 image captioning과 text-to-image가 있다.
+- Show, attend, and tell은 captioning의 단어에 따라 집중한 부분을 보여준다.
+- text-to-image 모델은 generative model로 구현한다.
+- Referencing task로는 Visual answering이 있다.
+- Visual data & audio의 matching task로는 소리로 장소 구분하는 일이 있다(SoundNet).
+- Translating task는 Speech2Face model, image to speech가 있다.
+- Referencing task로는 Sound source localization이 있다.
+
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+없음
+
+---
+
+### 3. 피어세션 정리
+
+https://www.notion.so/HOME-771be0eeb7c846cb935860cfa7b143ea
+
+필수과제 3번 quickdraw cGAN이 결과가 좋지 않았는데, 이에 대한 이유를 함께 고민했다.
+- blur연산이나 모폴로지 팽창, 침식등을 수행하면 좋을것이다.(너무 sparse한 dataset image)
+- epoch이 부족한 것 같다.
+- 3개의 채널까지 필요 없을것이다.(gray나 binary)
+- MNIST 같이 간단한 dataset으로 바꾸면 결과가 좋을 것이다.
+- generator와 discriminator의 구조가 단순한 fc이다.
+
+cGAN의 학습과정을 코드를 보면서 이해했다.
+
+- 먼저 generator가 noise로 만든 이미지를 discriminator가 구분하여
+- 그 다음 discriminator가 학습하는 구조이다.
+
+
+---
+
+### 4. 학습 회고
+
+어려운 강의 내용이었지만, multi-modal이 어떤식으로 작동하는지에 대해 배웠다.
+
+다 이해하지 못할만큼 어려웠기 때문에 나중에 꼭 복습해야겠다고 생각했다.
