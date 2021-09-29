@@ -5,6 +5,10 @@
 3) 피어세션 정리
 4) 학습 회고
 
+# 9 / 28 (화)
+
+강의 - Object Detection 3, 4강
+
 # 9 / 27 (월)
 
 강의 - Object Detection 1, 2강

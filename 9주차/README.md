@@ -52,3 +52,55 @@
 첫날인 만큼 먼저 데이터와 강의에 집중해서 진행해야겠다고 생각했다.
 
 또, EDA로 의미있는 결과를 보았으면 좋겠다.
+
+
+
+# 9 / 28 (화))
+
+### 1. 강의 복습
+
+- Object Detection에서 많이 이용되는 library는 MMDetection과 Detectron2이다.
+- MMDetection은 PyTorch 기반의 Object Detection 오픈소스 library이다.
+- Config 파일을 통해 데이터셋, 모델, 스케쥴러, optimizer등을 정의한다.
+- Detectron2는 PyTorch 기반의 library로 Object Detection외에도 Segmentation과 Pose prediction도 제공한다.
+- Neck은 마지막 feature map에서만 RoI를 추출하지 말고 중간 단계의 feature map에서 정보를 얻자는 생각에서 출발했다.
+- Neck은 다양한 크기의 detection을 수행하기 위해 필요하다.
+- 또, 하위 level과 상위 level의 정보를 합쳐서 사용한다.
+- Feature Pyramid Network(FPN)는 Top-down path를 만들었다.
+- 이 path에서 1x1 conv 연산과 Nearest neighbor upsampling이 일어난다.
+- FPN의 문제점은 backbone이 너무 길어 정보전달이 어렵다는 점인데, Path Aggregation Network(PANet)은 이를 bottom-up path augmentation을 활용했다.
+- DetectoRS는 RPN에서 영감을 받아 Recursive Feature Pyramid(RFP)를 제안했다.
+- RFP는 FPN과 비슷하지만 top-down path에서 나온 feature map을 다시 backbone으로 넣는 방식으로, FLOPs가 많다.
+- Bi-directional Feature Pyramid는 EfficientDet에서 제안된 방식으로 FPN처럼 단순 summation이 아닌 Weighted Feature Fusion을 이용했다.
+- NASFPN은 사람의 heuristic한 방법으로 모델링하지 않고, Neural architecture search로 찾는 방법이다.
+- 이 모델은 COCO dataset과 ResNet 기준으로 찾은 것이기 때문에 범용적이지 못하다.
+- AugFPN은 high level에서의 정보손실에 주목해 Residual Feature Augmentation과 Soft RoI Selection을 제안했다.
+
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+COCO format에 대해 찾아보던 중 fiftyone이라는 tool을 이용해 데이터를 한눈에 볼 수 있는 것을 확인했다.
+
+원래 서버에 있는 데이터를 로컬 환경에서 볼 수 있는 튜토리얼대로 따라해 보았지만, 포트 관련해 어려움을 겪어 데이터를 로컬로 다운받아 진행했다.
+
+그리고 간단한 EDA를 시도해 보았지만, 원하는 결과를 얻지 못했다.
+
+---
+
+### 3. 피어세션 정리
+
+fiftyone tool을 피어분들께 소개했다.
+
+또, 앞으로 프로젝트 진행을 할때 네이티브 코드를 이용할지, 라이브러리를 이용할지 고민했다.
+
+베이스라인 코드를 실행하면서 생긴 오류에 관해서도 이야기했다.
+
+---
+
+### 4. 학습 회고
+
+EDA에 관해 원하는 결과를 얻지 못해 아쉬웠다.
+
+다른 EDA 방법을 고민해보고 의미있는 결과를 얻으면 좋겠다.
