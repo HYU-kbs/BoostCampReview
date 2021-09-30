@@ -39,7 +39,6 @@
 - 한 이미지 안에 클래스 몇개씩 or 객체 몇개씩 존재하는지 분포?
 - 플라스틱은 주로 종이와 동시에 존재하는 등의 특징은 없을까?
   -  추후 confidence값이 낮은 경우, 이런 규칙을 활용할 수 있을 것 같음
-- 실제로는 하나의 객체인데 색이나 재질로 구분되어 annotation이 두가지로 되어있는 경우는 없을까?
 - RGB값 분포
 - 클래스마다 분포가 차이가 있는지
 - 더러운 플라스틱은 일반쓰레기로도 분류하기도 하던데?
@@ -55,7 +54,7 @@
 
 
 
-# 9 / 28 (화))
+# 9 / 28 (화)
 
 ### 1. 강의 복습
 
@@ -104,3 +103,46 @@ fiftyone tool을 피어분들께 소개했다.
 EDA에 관해 원하는 결과를 얻지 못해 아쉬웠다.
 
 다른 EDA 방법을 고민해보고 의미있는 결과를 얻으면 좋겠다.
+
+
+
+
+# 9 / 29 (수)
+
+### 1. 강의 복습
+- One stage detector는 Two stage detector가 속도가 느리다는 단점을 보완한 모델이다.
+- localization과 classification이 동시에 진행되며 객체에 대한 맥락적 이해가 높은 특징이 있다.
+- You Only Look Once(YOLO)는 region proposal이 없어 bbox 예측과 classification이 동시에 진행된다.
+- feature map에 grid로 나누고 각각의 grid에 대해 bbox를 만들어 예측한다.
+- loss로는 localization term(중심좌표와 높이, 너비), confidence term(object가 있거나 없거나), classification term이 있다.
+- 하지만 YOLO는 grid보다 작은 물체를 찾을 수 없고 마지막 feature만 사용하는 단점이 있다.
+- SSD는 서로다른 크기의 feature map을 모두 사용하고, fc layer 대신 conv layer를 사용하고 anchor box를 이용한다.
+- YOLO v2는 기존에 비해 정확도, 속도, 많은 클래스를 예측하도록 개선되었다.
+- YOLO v1에서 fc layer를 제거하고 bounding box 대신 anchor box로 바꾸고 offset 예측 문제로 바꾸어 성능을 향상시켰다.
+- 또, 기존의 GoogleNet에서 DarkNet으로 바꾸고 Fine-grained feature와 Multi-scale training을 이용했다.
+- YOLO v3는 skip-connection과 Multi-scale Feature map을 이용했다.
+- RetinaNet은 One stage detector가 가진 문제점인 class imbalance 문제(객체 영역보다 배경 영역이 많은 것)를 Focal Loss를 도입해 다루었다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+label의 분포, bbox의 위치와 크기등을 간단하게 EDA 해 보았다.
+
+label의 경우에는 불균형이 있었고, bbox는 여러곳에 위치해 있지만, 비교적 가운데에 모여있었다.
+
+bbox의 비율도 어느정도 경계가 있었고, 크기역시 주로 작은 크기를 가졌다.
+
+---
+
+### 3. 피어세션 정리
+
+Train과 Valid set을 어떻게 나누어야 할지 이야기했다.
+
+또, 모델 라이브러리가 어디까지 커스텀이 가능한지 알아보자고 했다.
+
+---
+
+### 4. 학습 회고
+
+이번주는 EDA를 수행하느라 베이스라인 코드를 이해하지 못했는데, 다음주부터 실험을 하기 위해 베이스라인 코드를 이해하고 넘어가야겠다고 생각했다.
