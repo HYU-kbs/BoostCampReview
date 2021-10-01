@@ -146,3 +146,34 @@ Train과 Valid set을 어떻게 나누어야 할지 이야기했다.
 ### 4. 학습 회고
 
 이번주는 EDA를 수행하느라 베이스라인 코드를 이해하지 못했는데, 다음주부터 실험을 하기 위해 베이스라인 코드를 이해하고 넘어가야겠다고 생각했다.
+
+# 9 / 30 (목)
+
+### 1. 강의 복습
+
+- 기존의 연구들이 모델의 성능을 향상시킬때 width scaling, depth scaling, resolution scaling, compound scaling 등을 이용했다.
+- 즉, width, depth, resolution의 균형이 잘 맞아야 성능과 효율성이 극대화된다.
+- EfficientNet은 SOTA의 큰 모델의 효율성을 가지면서 빠르고 작은 모델을 구현했다.
+- Grid search로 최적의 width, depth, resolution을 찾아 사용했다.
+- Detection task도 마찬가지로 EfficientDet은 Backbone, FPN, box/class classification network에 scaling을 적용했다.
+- EfficientDet은 BiFPN을 이용해 여러 resolution의 feature map을 가중합으로 feature map을 구했다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+EDA를 수행하며 RGB 분포도 확인했다.
+
+---
+
+### 3. 피어세션 정리
+
+Train/valid 로 나누는 방법에 대해 이야기했다.
+
+또, annotation에 대해 눈으로 검수한 결과를 공유해 살펴보았다.
+
+---
+
+### 4. 학습 회고
+
+Baseline code에 대해 이해하고 수정해보는 식으로 공부해야겠다.
