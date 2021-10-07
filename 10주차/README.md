@@ -68,3 +68,31 @@ Augmentation에 대해 이야기해보았다.
 ### 4. 학습 회고
 
 새로 배운 Mosaic Augmentation을 구현해 보아야겠다고 생각했다.
+
+
+
+# 10 / 7 (목)
+
+### 1. 강의 복습
+
+- mAP는 bbox를 많이 늘이면 증가할 수 있다.
+- 좋은 Validation set을 찾는 노력이 필요하다.
+- 여러 Ensemble로 성능을 높일 수 있다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+Mosaic로 class imbalance를 해결하려 했다.
+
+---
+
+### 3. 피어세션 정리
+
+Swin-T를 backbone으로 한 모델이 우리 조에선 가장 성능이 좋았다.
+
+---
+
+### 4. 학습 회고
+
+class imbalance를 해결하면 성능이 더 좋아질 것이라고 생각한다.
