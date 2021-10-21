@@ -89,3 +89,37 @@ Segmentation의 후처리로 CRF가 굉장히 중요할 것이다.
 
 아직 학습을 시작한 것은 아니지만, 나중에 학습 데이터에 대해 의문이 들경우 EDA를 진행해야겠다고 생각했다.
 
+
+# 10 / 20 (수)
+
+### 1. 강의 복습
+
+FCN model의 한계점을 극복한 모델들
+- Receptive Field를 키워나가던 Deeplab은 v2에서 여러가지 dilated rate를 가지는 branch형태로 바뀌었다.
+- 여러가지 dilated rate을 가진 conv는 서로다른 크기의 object에 집중한다.
+- PSPNet은 주변의 특징을 고려하여 mismatched relationship을 해결하고자 했고, category간의 관계를 사용하여 Confusion categories를 해결하고자 했고, 작은 객체들도 global contextual information을 이용해 Inconspicuous Classes 문제를 해결하고자 했다.
+- 또, Global Average Pooling을 이용해 주변 정보를 파악해서 객체를 예측하는데 사용했다.
+- Deeplab v3는 global average pooling과 concat을 사용했다.
+- Deeplab v3+는 Encoder-Decoder의 구조를 가지며 encoder에서 손실된 정보를 decoder에서 점진적으로 복원하는 구조를 가진다.
+- 또 backbone으로 modified Xception을 사용했는데, Depthwise와 Pointwise convolution을 하였다.
+
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+baseline코드에서 PSPNet으로 바꾸어 학습을 진행시켰다.
+
+
+---
+
+### 3. 피어세션 정리
+
+서로 다른 모델을 맡아 실험을 진행하기로 했다.
+
+---
+
+### 4. 학습 회고
+
+여러가지 augmentation을 적용해보며 성능을 실험해봐야겠다.
+
