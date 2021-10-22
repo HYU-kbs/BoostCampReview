@@ -160,4 +160,43 @@ Unet과 PSPNet을 각각 50 epoch씩 학습시켜 결과를 비교했다.
 
 ### 4. 학습 회고
 
-baseline이 jupyter notebook으로 되어있는데, 
+baseline이 jupyter notebook으로 되어있는데, 이를 python file로 바꾸어 학습을 진행시켜야겠다.
+
+
+# 10 / 22 (금)
+
+### 1. 강의 복습
+
+- Segmentation model을 쉽게 불러올 수 있는 라이브러리인 Segmentation Models를 이용하자.
+
+학습을 진행하면서 해야할 여러가지 사항들
+- 코드가 제대로 돌아가는지 확인할 때 디버깅을 이용하자
+- 같은 환경에서 실험을 진행하기 위해 시드를 고정하자
+- 실험을 진행하며 기록을 꼼꼼하게 하자
+- 실험은 한번에 하나씩 진행하자
+- 팀원끼리 역할을 분담하여 진행하자
+- Validation set을 잘 나누는 것은 중요하다
+- 상황에 맞는 augmentation을 적용하자
+- learning rate에 대한 scheduler를 변경하자
+- 또한 batch size나 loss, hyper parameter tuning을 진행하자
+- ensemble이나 pseudo labeling으로 성능을 올리자
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+jupyter notebook형태를 python file로 바꾸어 실험을 진행하기 더 좋게 바꾸었다.
+
+---
+
+### 3. 피어세션 정리
+
+best model을 저장하는 시점에 대해 valid mIoU와 valid loss 중 어느것이 좋은지 이야기했다.
+
+cross-entropy 외의 다른 loss에 대해 이야기했다.
+
+---
+
+### 4. 학습 회고
+
+이번주는 체계적으로 실험하지 못했는데, 다음주부터 체계적으로 학습을 시켜야겠다.
