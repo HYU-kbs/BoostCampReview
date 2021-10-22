@@ -123,3 +123,41 @@ baseline코드에서 PSPNet으로 바꾸어 학습을 진행시켰다.
 
 여러가지 augmentation을 적용해보며 성능을 실험해봐야겠다.
 
+
+
+
+# 10 / 21 (목)
+
+### 1. 강의 복습
+
+Unet 계열의 모델들
+- Unet은 Contracting Path와 Expanding Path가 U자 형태로 나열이 되어있어 이름이 붙여졌다.
+- Contracting path는 일반적인 특징을 추출하는 단계이고 Expanding path는 localization을 수행한다.
+- 또, 같은 level의 결과를 skip-connection으로 concat하는 형태이다.
+- 의료분야에서 있을법한 Augmentation으로 Random Elastic deformation을 이용했다.
+- 또한 인접한 셀을 분리하기 위해 경계부분에 가중치를 제공했다.
+- 하지만 Unet은 깊이가 4로 고정되어있어 데이터셋마다 성능을 보장하지 못하고 skip-connection도 단순하다.
+- Unet++는 encoder를 공유하는 다양한 깊이의 Unet을 만들었다.
+- 또한 DenseNet에서 사용한 Dense skip connection으로 보다 복잡한 skip connection을 구현했다. 이는 여러 depth를 ensemble한 효과를 갖는다.
+- 또한 hybrid loss를 이용했다.
+- 그러나 parameter와 memory가 증가했고, 다양한 scale에서의 connection이 되지않는 한계가 있다.
+- Unet3+는 Full-scale skip connection으로 다양한 scale(Conventional, inter, intra)의 connection을 가졌다.
+- 또, noise로 인한 false-positive를 방지하기 위해 Classification-guided module을 사용했다.
+
+---
+
+### 2. 과제 수행 과정 / 결과물 정리
+
+Unet과 PSPNet을 각각 50 epoch씩 학습시켜 결과를 비교했다.
+
+---
+
+### 3. 피어세션 정리
+
+각자의 모델의 성능을 비교하였다.
+
+---
+
+### 4. 학습 회고
+
+baseline이 jupyter notebook으로 되어있는데, 
