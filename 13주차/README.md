@@ -1,4 +1,4 @@
-# 10 / 25 (월)
+# 10 / 25 - 29
 
 ### 1. 강의 복습
 
@@ -19,9 +19,13 @@ HRNet
 
 DeeplabV3+ 모델로 학습을 진행시켰다.
 
+또, mmsegmentation으로 HRNet을 학습시켰다.
+
 ---
 
 ### 3. 피어세션 정리
+
+https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/discussions
 
 - Unet계열에 backbone으로 efficientnet을 사용. 더 좋은 것을 쓰더라도 성능이 좋아지지 않았다.
 - 최고 성능은 efficientnet-b4로 epoch 150에서 mIoU 0.652
@@ -43,4 +47,4 @@ DeeplabV3+ 모델로 학습을 진행시켰다.
 
 ### 4. 학습 회고
 
-오늘 강의에서 배운 SOTA 모델인 HRNet을 적용해 실험해볼 것이다.
+pseduo labeling이나 후처리를 통해 성능향상에 집중할 것이다.
